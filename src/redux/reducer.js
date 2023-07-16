@@ -18,13 +18,6 @@ const initialState = {
   countryDetail: [],
   allActivities: [],
   countriesIds: [],
-  // activeFilters: {
-  //   query: '',
-  //   continent: 'All',
-  //   activityName: '',
-  //   alphabetOrder: '',
-  //   populationOrder: ''
-  // },
   currentPage: 1,
   isLoading: false,
   error: null,

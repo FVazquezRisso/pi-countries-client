@@ -17,7 +17,7 @@ import {
 } from "./Styles";
 
 export default function FormPage() {
-  const { allCountries, countriesIds } = useSelector((state) => state);
+  const { countriesIds } = useSelector((state) => state);
   const dispatch = useDispatch();
   const { countryName } = useParams();
   const navigate = useNavigate();
@@ -52,11 +52,11 @@ export default function FormPage() {
   };
 
   const handleChange = (event) => {
-    const value = event.target.value
-    const name = event.target.name
+    const value = event.target.value;
+    const name = event.target.name;
 
     switch (name) {
-      case 'name':
+      case "name":
         if (/^[a-zA-Z\s]*$/.test(value) && value.length <= 20) {
           setActivityInfo({
             ...activityInfo,
@@ -64,34 +64,39 @@ export default function FormPage() {
           });
         }
 
-      case 'difficulty':
+      case "difficulty":
         if (Number(value) >= 1 && Number(value) <= 5) {
           setActivityInfo({
             ...activityInfo,
-            [name]: value
-          })
+            [name]: value,
+          });
         }
 
-      case 'duration': 
-        if (Number(value) >= 1 && Number(value) <= 16) {
+      case "duration":
+        if (Number(value) > -1 && Number(value) <= 16) {
           setActivityInfo({
             ...activityInfo,
-            [name]: value
-          })
+            [name]: value,
+          });
         }
 
-      case 'season':
-        if (value === 'Summer' || value === 'Autumn' || value === 'Winter' || value === "Spring") {
+      case "season":
+        if (
+          value === "Summer" ||
+          value === "Autumn" ||
+          value === "Winter" ||
+          value === "Spring"
+        ) {
           setActivityInfo({
             ...activityInfo,
-            [name]: value
-          })
-        } 
+            [name]: value,
+          });
+        }
     }
   };
 
   const handleClick = () => {
-    if (validateActivityInfo(activityInfo, allCountries)) {
+    if (validateActivityInfo(activityInfo)) {
       postData(activityInfo);
       dispatch(removeCountriesId());
       navigate("/home");
@@ -99,7 +104,7 @@ export default function FormPage() {
   };
 
   useEffect(() => {
-    if (validateActivityInfo(activityInfo, allCountries)) {
+    if (validateActivityInfo(activityInfo)) {
       setButtonState("");
     } else {
       setButtonState("disabled");
@@ -129,7 +134,7 @@ export default function FormPage() {
           />
         </Label>
         <Label>
-          Difficulty:
+          Difficulty: {activityInfo.difficulty}
           <InputDifficulty
             type="range"
             name="difficulty"
@@ -140,7 +145,7 @@ export default function FormPage() {
           />
         </Label>
         <Label>
-          Duration:
+          Duration (0-16 hrs):
           <InputDuration
             type="number"
             name="duration"

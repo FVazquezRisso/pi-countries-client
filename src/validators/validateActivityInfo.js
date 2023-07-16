@@ -1,11 +1,4 @@
-export const validateActivityInfo = ({
-  name,
-  difficulty,
-  duration,
-  season,
-  CountryIds,
-}, allCountries) => {
-
+export const validateActivityInfo = ({ name, difficulty, duration, season }) => {
   if (/^\d/.test(name) || name.length === 0) return false;
 
   if (
@@ -15,7 +8,7 @@ export const validateActivityInfo = ({
   )
     return false;
 
-  if (isNaN(Number(duration)) || Number(duration) < 1 || Number(duration) > 16)
+  if (isNaN(Number(duration)) || Number(duration) < 0 || Number(duration) > 16)
     return false;
 
   if (
@@ -25,12 +18,6 @@ export const validateActivityInfo = ({
     season !== "Spring"
   )
     return false;
-
-  const areAllIdsValid = CountryIds.every((id) => {
-    return allCountries.some((country) => country.id === id);
-  });
-
-  if (!areAllIdsValid) return false;
 
   return true;
 };

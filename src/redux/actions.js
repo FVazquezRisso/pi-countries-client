@@ -10,7 +10,6 @@ import {
   ADD_COUNTRIES_ID,
   REMOVE_COUNTRIES_ID,
   SET_LOADING,
-  // CHANGE_FILTERS
 } from "./action-types";
 import axios from "axios";
 
