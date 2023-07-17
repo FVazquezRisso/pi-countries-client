@@ -1,4 +1,6 @@
 export const validateActivityInfo = ({ name, difficulty, duration, season }) => {
+  if (!name || !difficulty || !duration || !season) return false;
+
   if (/^\d/.test(name) || name.length === 0) return false;
 
   if (

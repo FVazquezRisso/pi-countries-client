@@ -47,9 +47,12 @@ const textAnimation = keyframes`
 
 
 export const NavContainer = styled.nav`
+  display: flex;
   height: 1.5rem;
-  margin: 1rem 1rem 0 1rem; 
+  margin: 1rem 1rem 0 1rem;
   padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 2px solid transparent;
   border-radius: 15px;
   animation: ${boxAnimation} 5s ease-in-out infinite;
@@ -81,5 +84,23 @@ export const NavButton = styled(NavLink)`
   &.active:hover {
     cursor: default;
     border-bottom: none;
+  }
+`;
+
+export const LogoutButton = styled(NavLink)`
+  margin: 0 1rem;
+  padding: 0.2rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: white;
+  animation: ${textAnimation} 5s ease-in-out infinite;
+  transition-property: border;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+
+  &:hover {
+    border-bottom: 3px solid red;
+    border-radius: 5px;
   }
 `;

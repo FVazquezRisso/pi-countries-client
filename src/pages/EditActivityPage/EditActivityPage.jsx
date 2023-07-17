@@ -1,9 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { validateActivityInfo } from "../../validators/validateActivityInfo";
-import SearchSelect from "../../components/SearchSelect/SearchSelect";
-import { useSelector, useDispatch } from "react-redux";
-import { removeCountriesId } from "../../redux/actions";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   FormContainer,
@@ -15,44 +12,36 @@ import {
   Label,
   Button,
 } from "./Styles";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllActivities } from "../../redux/actions";
+import { Link } from "react-router-dom";
 
-export default function FormPage() {
-  const { UserId, countriesIds } = useSelector((state) => state);
-  const dispatch = useDispatch();
-  const { countryName } = useParams();
+export default function EditActivityPage() {
   const navigate = useNavigate();
+  const { allowAccess } = useSelector((state) => state);
+  if (!allowAccess) {
+    return (
+      <>
+        <p>No tienes acceso, debes iniciar sesión para continuar.</p>
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
+      </>
+    );
+  }
+  const { activityId } = useParams();
+  const dispatch = useDispatch();
   const [buttonState, setButtonState] = useState("disabled");
+
+  if (!activityId) {
+    return <p>No se ha encontrado la actividad.</p>;
+  }
 
   const [activityInfo, setActivityInfo] = useState({
     name: "",
-    difficulty: 3,
-    duration: 1,
-    season: "Summer",
-    CountryIds: countriesIds,
-    UserId: UserId,
+    difficulty: "",
+    duration: "",
+    season: "",
   });
-
-  const postData = async ({
-    name,
-    difficulty,
-    duration,
-    season,
-    CountryIds,
-    UserId,
-  }) => {
-    try {
-      const response = await axios.post("http://localhost:3001/activities", {
-        name: name.trim(),
-        difficulty: Number(difficulty),
-        duration: Number(duration),
-        season: season.trim(),
-        CountryIds,
-        UserId,
-      });
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -102,14 +91,6 @@ export default function FormPage() {
     }
   };
 
-  const handleClick = () => {
-    if (validateActivityInfo(activityInfo)) {
-      postData(activityInfo);
-      dispatch(removeCountriesId());
-      navigate(`/home/${UserId}`);
-    }
-  };
-
   useEffect(() => {
     if (validateActivityInfo(activityInfo)) {
       setButtonState("");
@@ -118,14 +99,30 @@ export default function FormPage() {
     }
   }, [activityInfo]);
 
-  useEffect(() => {
-    setActivityInfo((previousActivityInfo) => {
-      return {
-        ...previousActivityInfo,
-        CountryIds: countriesIds,
-      };
-    });
-  }, [countriesIds]);
+  const handleClick = async (event) => {
+    event.preventDefault();
+    if (
+      activityInfo.name &&
+      activityInfo.difficulty &&
+      activityInfo.duration &&
+      activityInfo.season
+    ) {
+      try {
+        const response = await axios.put(
+          `http://localhost:3001/activities/${activityId}`,
+          activityInfo
+        );
+
+        if (response.status === 200) {
+          dispatch(getAllActivities());
+          navigate(`/activities`);
+          return "Actividad actualizada con éxito.";
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+  };
 
   return (
     <MainContainer>
@@ -174,15 +171,13 @@ export default function FormPage() {
           </SelectSeason>
         </Label>
 
-        <SearchSelect initialSelectedOption={countryName} />
-
         <Button
           type="button"
           onClick={handleClick}
           disabled={buttonState}
           className={buttonState}
         >
-          Create Activity
+          Edit Activity
         </Button>
       </FormContainer>
     </MainContainer>

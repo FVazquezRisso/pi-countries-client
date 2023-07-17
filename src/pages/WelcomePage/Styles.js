@@ -72,7 +72,7 @@ export const WelcomeContainer = styled.div`
   padding: 2rem;
   align-items: center;
   flex-direction: column;
-  background-color: #111;
+  background-color: rgba(1, 1, 1, 0.8);
   border-radius: 25px;
   animation: ${boxAnimation} 5s ease-in-out infinite;
 `;
@@ -88,6 +88,12 @@ export const AuthorName = styled.h4`
   margin: 0 auto;
   text-align: center;
   animation: ${textAnimation} 5s ease-in-out infinite;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  width: 70%;
+  justify-content: space-around;
 `;
 
 export const Button = styled(Link)`

@@ -3,6 +3,7 @@ import {
   WelcomeContainer,
   Title,
   AuthorName,
+  ButtonsContainer,
   Button,
 } from "./Styles";
 
@@ -12,7 +13,10 @@ export default function WelcomePage() {
       <WelcomeContainer>
         <Title>PI Countries</Title>
         <AuthorName>By: Facundo Vázquez</AuthorName>
-        <Button to="/home">Explore Now</Button>
+        <ButtonsContainer>
+          <Button to="/login">Sign In</Button>
+          <Button to="/register">Sign Up</Button>
+        </ButtonsContainer>
       </WelcomeContainer>
     </MainContainer>
   );

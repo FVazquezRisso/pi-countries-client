@@ -9,10 +9,14 @@ import {
   CHANGE_CURRENT_PAGE,
   ADD_COUNTRIES_ID,
   REMOVE_COUNTRIES_ID,
-  SET_LOADING
+  SET_LOADING,
+  SET_USER_ID,
+  SET_ALLOWED_ACCESS,
 } from "./action-types";
 
 const initialState = {
+  UserId: null,
+  allowAccess: false,
   allCountries: [],
   filteredCountries: [],
   countryDetail: [],
@@ -116,26 +120,40 @@ const rootReducer = (state = initialState, { type, payload, error }) => {
         ...state,
         countriesIds: [...state.countriesIds, payload],
       };
-    
+
     case REMOVE_COUNTRIES_ID:
       if (!payload) {
         return {
           ...state,
-          countriesIds: []
-        }
+          countriesIds: [],
+        };
       }
 
-      const countryIdRemoved = state.countriesIds.filter(id => id !== payload)
+      const countryIdRemoved = state.countriesIds.filter(
+        (id) => id !== payload
+      );
       return {
         ...state,
-        countriesIds: countryIdRemoved
-      }
-    
+        countriesIds: countryIdRemoved,
+      };
+
     case SET_LOADING:
       return {
         ...state,
-        isLoading: payload
-      }
+        isLoading: payload,
+      };
+
+    case SET_USER_ID:
+      return {
+        ...state,
+        UserId: payload,
+      };
+
+    case SET_ALLOWED_ACCESS:
+      return {
+        ...state,
+        allowAccess: payload,
+      };
 
     default:
       return state;

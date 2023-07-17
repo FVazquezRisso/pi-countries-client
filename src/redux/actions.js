@@ -10,6 +10,8 @@ import {
   ADD_COUNTRIES_ID,
   REMOVE_COUNTRIES_ID,
   SET_LOADING,
+  SET_USER_ID,
+  SET_ALLOWED_ACCESS,
 } from "./action-types";
 import axios from "axios";
 
@@ -78,11 +80,12 @@ export const filterByContinent = (continent) => {
 };
 
 export const getAllActivities = () => {
-  const endpoint = "http://localhost:3001/activities";
-  return async (dispatch) => {
+  const endpoint = "http://localhost:3001/activities/";
+  return async (dispatch, getState) => {
     try {
       dispatch(setLoading(true));
-      const response = await axios(endpoint);
+      const { UserId } = getState();
+      const response = await axios(endpoint + UserId);
       const data = response.data;
 
       if (response.status === 200) {
@@ -156,15 +159,16 @@ export const setLoading = (isLoading) => {
   };
 };
 
-// export const changeFilters = (filters) => {
-//   dispatch(searchCountry(filters.query))
-//   dispatch(filterByContinent(filters.continent))
-//   dispatch(getCountryByActivityName(filters.activityName))
-//   dispatch(sortByAlphabet(filters.alphabetOrder))
-//   dispatch(sortByPopulation(filters.populationOrder))
+export const setUserId = (userId) => {
+  return {
+    type: SET_USER_ID,
+    payload: userId,
+  };
+};
 
-//   return {
-//     type: CHANGE_FILTERS,
-//     payload: filters
-//   }
-// }
+export const setAllowedAccess = (allow) => {
+  return {
+    type: SET_ALLOWED_ACCESS,
+    payload: allow,
+  };
+};
