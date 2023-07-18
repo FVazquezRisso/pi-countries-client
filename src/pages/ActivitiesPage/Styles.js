@@ -4,7 +4,7 @@ export const ActivitiesListContainer = styled.main`
   display: grid;
   width: 100%;
   margin-top: 3rem;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 3.5rem;
 
   &.noActivities {
