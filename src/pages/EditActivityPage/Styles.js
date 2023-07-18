@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { getRandomColor } from "../../utils/randomColors";
+import { Link } from "react-router-dom";
 
 export const color1 = getRandomColor(true);
 export const color2 = getRandomColor(true);
@@ -166,4 +167,30 @@ export const Button = styled.button`
       transform: scale(1);
     }
   }
+`;
+
+export const FormLink = styled(Link)`
+  margin: 1rem 0;
+  padding: 1rem;
+  text-decoration: none;
+  font-weight: bolder;
+  border: 2px solid white;
+  border-radius: 15px;
+  animation: ${animation} 5s ease-in-out infinite;
+  background-color: #111;
+
+  &:hover {
+    transform: scale(1.05);
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+    cursor: pointer;
+  }
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 3rem;
 `;

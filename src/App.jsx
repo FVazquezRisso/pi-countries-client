@@ -17,7 +17,12 @@ function App() {
   const { allowAccess } = useSelector((state) => state);
 
   useEffect(() => {
-    if (!allowAccess && location.startsWith("/home")) {
+    if (
+      !allowAccess &&
+      location !== "/" &&
+      location !== "/register" &&
+      location !== "/login"
+    ) {
       navigate("/");
     }
   }, [allowAccess, location, navigate]);

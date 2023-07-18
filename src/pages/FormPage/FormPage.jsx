@@ -14,10 +14,30 @@ import {
   SelectSeason,
   Label,
   Button,
+  ButtonsContainer,
+  FormLink,
 } from "./Styles";
+import {
+  NoResultsContainer,
+  NoResultsMessage,
+} from "../../Styles/NoResultsMessage";
 
 export default function FormPage() {
-  const { UserId, countriesIds } = useSelector((state) => state);
+  const { UserId, countriesIds, allowAccess } = useSelector((state) => state);
+
+  if (!allowAccess) {
+    return (
+      <NoResultsContainer>
+        <NoResultsMessage>
+          You don't have access, you must log in to continue.
+        </NoResultsMessage>
+        <ButtonsContainer>
+          <FormLink to="/login">Login</FormLink>
+          <FormLink to="/register">Register</FormLink>
+        </ButtonsContainer>
+      </NoResultsContainer>
+    );
+  }
   const dispatch = useDispatch();
   const { countryName } = useParams();
   const navigate = useNavigate();

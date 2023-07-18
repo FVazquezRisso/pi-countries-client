@@ -43,7 +43,7 @@ export default function RegisterPage() {
       const existUser = data.filter((user) => user.username === username);
 
       if (existUser.length !== 0) {
-        throw new Error(`El usuario "${username}" ya existe.`);
+        throw new Error(`The user '${username}' already exists.`);
       }
 
       const response = await axios.post("http://localhost:3001/users", {
@@ -61,14 +61,24 @@ export default function RegisterPage() {
     event.preventDefault();
     if (input.username && input.password && input.confirmPassword) {
       try {
+        if (input.password.length < 4) {
+          throw new Error("The password must be at least 4 characters long.");
+        }
+
+        if (!/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(input.password)) {
+          throw new Error(
+            "The password must contain at least one letter and one number."
+          );
+        }
+
         if (input.password !== input.confirmPassword) {
-          throw new Error("Las contraseñas no coinciden.");
+          throw new Error("Passwords do not match.");
         }
 
         const id = await postData(input);
 
         if (!id) {
-          throw new Error("Error al registrar el usuario.");
+          throw new Error("Error registering the user.");
         }
 
         dispatch(setUserId(id));
@@ -100,6 +110,7 @@ export default function RegisterPage() {
             type="text"
             value={input.username}
             onChange={handleChange}
+            onPaste={(event) => event.preventDefault()}
           />
         </Label>
         <Label>
@@ -110,6 +121,7 @@ export default function RegisterPage() {
             type="password"
             value={input.password}
             onChange={handleChange}
+            onPaste={(event) => event.preventDefault()}
           />
         </Label>
         <Label>
@@ -120,6 +132,7 @@ export default function RegisterPage() {
             type="password"
             value={input.confirmPassword}
             onChange={handleChange}
+            onPaste={(event) => event.preventDefault()}
           />
         </Label>
         {error && (

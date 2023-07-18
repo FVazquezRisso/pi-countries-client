@@ -22,10 +22,10 @@ export default function ActivityCard({
 
       if (response.status === 200) {
         dispatch(getAllActivities());
-        return "La actividad se ha eliminado con éxito.";
+        return "The activity has been successfully deleted.";
       }
 
-      throw new Error("Error al eliminar la actividad.");
+      throw new Error("Error deleting the activity.");
     } catch (error) {
       console.error(error.message);
     }

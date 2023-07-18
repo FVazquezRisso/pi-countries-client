@@ -40,19 +40,19 @@ export default function LoginPage() {
     try {
       const { username, password } = input;
 
-      if (!username) throw new Error("Debe ingresar un nombre de usuario.");
+      if (!username) throw new Error("Username is required.");
 
-      if (!password) throw new Error("Debe ingresar una contraseña.");
+      if (!password) throw new Error("Password is required.");
 
       const { data } = await axios("http://localhost:3001/users");
 
       const existUser = data.find((user) => user.username === username);
 
       if (!existUser)
-        throw new Error(`No existe el usuario con el nombre ${username}.`);
+        throw new Error(`The user with the name '${username}' does not exist.`);
 
       if (existUser.password !== password)
-        throw new Error("Contraseña incorrecta.");
+        throw new Error("Incorrect password.");
 
       dispatch(setAllowedAccess(true));
       dispatch(setUserId(existUser.id));
@@ -82,6 +82,7 @@ export default function LoginPage() {
             type="text"
             onChange={handleChange}
             value={input.username}
+            onPaste={(event) => event.preventDefault()}
           />
         </Label>
         <Label>
@@ -92,6 +93,7 @@ export default function LoginPage() {
             type="password"
             onChange={handleChange}
             value={input.password}
+            onPaste={(event) => event.preventDefault()}
           />
         </Label>
         {error && (

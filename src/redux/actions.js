@@ -41,7 +41,7 @@ export const searchCountry = (query, disableViewAllCountries) => {
       dispatch({
         type: SEARCH_COUNTRY,
         payload: [],
-        error: "No se econtraron países con ese nombre.",
+        error: "No countries found with that name.",
       });
       dispatch(setLoading(false));
     }
@@ -68,7 +68,7 @@ export const getCountryById = (id) => {
       dispatch({
         type: GET_COUNTRY_BY_ID,
         payload: [],
-        error: "No se encontró ningún país con ese ID.",
+        error: "No country found with that ID.",
       });
       dispatch(setLoading(false));
     }
@@ -100,7 +100,7 @@ export const getAllActivities = () => {
       dispatch({
         type: GET_ALL_ACTIVITIES,
         payload: [],
-        error: "No se econtraron actividades con ese nombre.",
+        error: "No activities found with that name.",
       });
       dispatch(setLoading(false));
     }

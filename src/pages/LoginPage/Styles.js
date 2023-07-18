@@ -135,7 +135,10 @@ export const Input = styled.input`
 `;
 
 export const ErrorMessage = styled.p`
+  width: 80%;
   margin: 0;
+  text-align: center;
+  overflow-wrap: break-word;
 `;
 
 export const Button = styled.button`

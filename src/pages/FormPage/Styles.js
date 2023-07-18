@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { getRandomColor } from "../../utils/randomColors";
+import { Link } from "react-router-dom";
 
 export const color1 = getRandomColor(true);
 export const color2 = getRandomColor(true);
@@ -31,12 +32,11 @@ const animation = keyframes`
   }
 `;
 
-
 export const MainContainer = styled.main`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  `;
+`;
 
 export const FormContainer = styled.form`
   margin-top: 5rem;
@@ -48,7 +48,7 @@ export const FormContainer = styled.form`
 `;
 
 export const InputName = styled.input`
-  margin: .6rem 1.5rem;
+  margin: 0.6rem 1.5rem;
   padding: 8px;
   font-size: 16px;
   border: none;
@@ -92,7 +92,7 @@ export const InputDifficulty = styled.input`
 `;
 
 export const InputDuration = styled.input`
-  margin: .5rem 1.5rem;
+  margin: 0.5rem 1.5rem;
   padding: 8px;
   font-size: 16px;
   border: none;
@@ -109,7 +109,7 @@ export const InputDuration = styled.input`
 `;
 
 export const SelectSeason = styled.select`
-  margin: .6rem 1rem;
+  margin: 0.6rem 1rem;
   padding: 8px;
   font-size: 16px;
   border: none;
@@ -126,7 +126,7 @@ export const SelectSeason = styled.select`
 
 export const Label = styled.label`
   width: 80%;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
   min-height: 10%;
   padding: 0.25rem 2rem;
   display: grid;
@@ -167,4 +167,30 @@ export const Button = styled.button`
       transform: scale(1);
     }
   }
+`;
+
+export const FormLink = styled(Link)`
+  margin: 1rem 0;
+  padding: 1rem;
+  text-decoration: none;
+  font-weight: bolder;
+  border: 2px solid white;
+  border-radius: 15px;
+  animation: ${animation} 5s ease-in-out infinite;
+  background-color: #111;
+
+  &:hover {
+    transform: scale(1.05);
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+    cursor: pointer;
+  }
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 3rem;
 `;

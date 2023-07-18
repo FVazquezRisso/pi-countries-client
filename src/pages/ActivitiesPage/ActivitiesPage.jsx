@@ -38,7 +38,7 @@ export default function ActivitiesPage() {
         })
       ) : (
         <NoResultsContainer>
-          <NoResultsMessage>No hay actividades creadas.</NoResultsMessage>
+          <NoResultsMessage>There are no created activities.</NoResultsMessage>
         </NoResultsContainer>
       )}
     </ActivitiesListContainer>

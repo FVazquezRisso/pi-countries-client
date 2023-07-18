@@ -11,29 +11,39 @@ import {
   SelectSeason,
   Label,
   Button,
+  FormLink,
+  ButtonsContainer,
 } from "./Styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllActivities } from "../../redux/actions";
-import { Link } from "react-router-dom";
+import {
+  NoResultsContainer,
+  NoResultsMessage,
+} from "../../Styles/NoResultsMessage";
 
 export default function EditActivityPage() {
   const navigate = useNavigate();
   const { allowAccess } = useSelector((state) => state);
   if (!allowAccess) {
     return (
-      <>
-        <p>No tienes acceso, debes iniciar sesión para continuar.</p>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-      </>
+      <NoResultsContainer>
+        <NoResultsMessage>
+          You don't have access, you must log in to continue.
+        </NoResultsMessage>
+        <ButtonsContainer>
+          <FormLink to="/login">Login</FormLink>
+          <FormLink to="/register">Register</FormLink>
+        </ButtonsContainer>
+      </NoResultsContainer>
     );
   }
+
   const { activityId } = useParams();
   const dispatch = useDispatch();
   const [buttonState, setButtonState] = useState("disabled");
 
   if (!activityId) {
-    return <p>No se ha encontrado la actividad.</p>;
+    return <p>Activity not found.</p>;
   }
 
   const [activityInfo, setActivityInfo] = useState({

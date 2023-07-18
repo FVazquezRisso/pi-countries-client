@@ -29,9 +29,7 @@ export default function DetailPage() {
       <LoadingAnimation />
     ) : (
       <NoResultsContainer>
-        <NoResultsMessage>
-          No se encontraron países con ese ID.
-        </NoResultsMessage>
+        <NoResultsMessage>No countries found with that ID.</NoResultsMessage>
       </NoResultsContainer>
     );
   }

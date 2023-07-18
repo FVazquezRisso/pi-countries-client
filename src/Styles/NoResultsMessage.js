@@ -55,11 +55,12 @@ const animation = keyframes`
 
 
 export const NoResultsContainer = styled.div`
+  display: flex;
   width: 100%;
   height: 70vh;
-  display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `;
 
 export const NoResultsMessage = styled.p`
