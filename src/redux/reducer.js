@@ -12,6 +12,8 @@ import {
   SET_LOADING,
   SET_USER_ID,
   SET_ALLOWED_ACCESS,
+  GET_ALL_USERS,
+  GET_USER_BY_ID,
 } from "./action-types";
 
 const initialState = {
@@ -22,6 +24,8 @@ const initialState = {
   countryDetail: [],
   allActivities: [],
   countriesIds: [],
+  allUsers: [],
+  userDetail: [],
   currentPage: 1,
   isLoading: false,
   error: null,
@@ -33,10 +37,17 @@ const rootReducer = (state = initialState, { type, payload, error }) => {
       return {
         ...state,
         allCountries: payload,
+        filteredCountries: payload,
         error: error || null,
       };
 
     case GET_COUNTRY_BY_ID:
+      if (payload === null) {
+        return {
+          ...state,
+          countryDetail: [],
+        };
+      }
       return {
         ...state,
         countryDetail: payload,
@@ -153,6 +164,27 @@ const rootReducer = (state = initialState, { type, payload, error }) => {
       return {
         ...state,
         allowAccess: payload,
+      };
+
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        allUsers: payload,
+        error: error || null,
+      };
+
+    case GET_USER_BY_ID:
+      if (payload === null) {
+        return {
+          ...state,
+          userDetail: [],
+        };
+      }
+
+      return {
+        ...state,
+        userDetail: payload,
+        error: error || null,
       };
 
     default:
