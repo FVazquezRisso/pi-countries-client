@@ -11,3 +11,5 @@ export const REMOVE_COUNTRIES_ID = 'REMOVE_COUNTRIES_ID'
 export const SET_LOADING = "SET_LOADING";
 export const SET_USER_ID = "SET_USER_ID";
 export const SET_ALLOWED_ACCESS = "SET_ALLOWED_ACCESS";
+export const GET_ALL_USERS = "GET_ALL_USERS ";
+export const GET_USER_BY_ID = "GET_USER_BY_ID";
