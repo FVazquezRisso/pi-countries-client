@@ -12,6 +12,8 @@ import {
   SET_LOADING,
   SET_USER_ID,
   SET_ALLOWED_ACCESS,
+  GET_ALL_USERS,
+  GET_USER_BY_ID,
 } from "./action-types";
 import axios from "axios";
 
@@ -170,5 +172,61 @@ export const setAllowedAccess = (allow) => {
   return {
     type: SET_ALLOWED_ACCESS,
     payload: allow,
+  };
+};
+
+export const getAllUsers = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch(setLoading(true));
+      const { UserId } = getState();
+      const response = await axios("http://localhost:3001/users");
+      const { data } = response;
+      const users = data.filter((user) => user.id !== UserId);
+
+      if (response.status === 200) {
+        dispatch({
+          type: GET_ALL_USERS,
+          payload: users,
+        });
+      }
+
+      dispatch(setLoading(false));
+    } catch (error) {
+      console.error(error.message);
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: [],
+        error: "There has been an error while loading all users.",
+      });
+      dispatch(setLoading(false));
+    }
+  };
+};
+
+export const getUserById = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await axios(`http://localhost:3001/users/${id}`);
+      const { data } = response;
+
+      if (response.status === 200) {
+        dispatch({
+          type: GET_USER_BY_ID,
+          payload: data,
+        });
+      }
+
+      dispatch(setLoading(false));
+    } catch (error) {
+      console.error(error.message);
+      dispatch({
+        type: GET_USER_BY_ID,
+        payload: [],
+        error: "User not found",
+      });
+      dispatch(setLoading(false));
+    }
   };
 };
