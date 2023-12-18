@@ -26,7 +26,7 @@ export default function CountryCard({ img, name, continent, id }) {
       "https://img.icons8.com/external-others-pike-picture/50/external-arctic-arctic-and-antarctic-others-pike-picture.png",
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     dispatch(getCountryById(id));
     navigate(`/detail/${id}`);
   };
