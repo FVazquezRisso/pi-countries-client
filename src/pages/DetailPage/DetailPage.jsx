@@ -7,7 +7,7 @@ import {
   Image,
   Name,
   Info,
-  Button
+  Button,
 } from "./Styles";
 import {
   NoResultsContainer,
@@ -18,7 +18,6 @@ import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation
 export default function DetailPage() {
   const dispatch = useDispatch();
   const { countryDetail, isLoading } = useSelector((state) => state);
-  
 
   const handleClick = () => {
     dispatch(addCountriesId(countryDetail.id));
