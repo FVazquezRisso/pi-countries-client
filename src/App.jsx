@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import ActivitiesPage from "./pages/ActivitiesPage/ActivitiesPage";
 import EditActivityPage from "./pages/EditActivityPage/EditActivityPage";
+import UsersPage from "./pages/UsersPage/UsersPage";
+import UserDetail from "./pages/UserDetail/UserDetail";
 
 function App() {
   const location = useLocation().pathname;
@@ -41,6 +43,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/activities" element={<ActivitiesPage />} />
         <Route path="/edit/:activityId" element={<EditActivityPage />} />
+        <Route path="/users" element={<UsersPage />} />
+        <Route path="/users/:userId" element={<UserDetail />} />
       </Routes>
     </>
   );
