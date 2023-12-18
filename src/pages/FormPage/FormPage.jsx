@@ -151,7 +151,7 @@ export default function FormPage() {
     <MainContainer>
       <FormContainer>
         <Label>
-          Name:
+          Name (letters only):
           <InputName
             autoComplete="off"
             type="text"
