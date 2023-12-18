@@ -10,6 +10,7 @@ export default function ActivityCard({
   duration,
   season,
   id,
+  hiddenButtons,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,10 +43,12 @@ export default function ActivityCard({
       <Info>Difficulty: {difficulty}</Info>
       <Info>Duration: {duration}h</Info>
       <Info>Season: {season}</Info>
-      <ButtonsContainer>
-        <Button onClick={handleEditActivity}>Edit</Button>
-        <Button onClick={handleDeleteActivity}>Delete</Button>
-      </ButtonsContainer>
+      {!hiddenButtons && (
+        <ButtonsContainer>
+          <Button onClick={handleEditActivity}>Edit</Button>
+          <Button onClick={handleDeleteActivity}>Delete</Button>
+        </ButtonsContainer>
+      )}
     </CardContainer>
   );
 }
